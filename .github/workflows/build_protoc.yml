@@ -1,0 +1,24 @@
+name: C# Tests
+
+on:
+  workflow_call:
+    inputs:
+      safe-checkout:
+        required: true
+        description: "The SHA key for the commit we want to run over"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+   windows:
+    runs-on: windows-2022
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v2
+      with:
+         msbuild-architecture: x64
+   
